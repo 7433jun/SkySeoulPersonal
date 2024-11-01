@@ -4,11 +4,6 @@ using UnityEngine;
 
 public abstract class BaseCharacter : MonoBehaviour
 {
-    //[SerializeField] private float maxHealth = 100.0f;
-    //[SerializeField] private float currentHealth = 100.0f;
-    //[SerializeField] private float baseDefence = 0.0f;
-    //[SerializeField] private float additionlDefence = 0.0f;
-
     [SerializeField] private float speed = 5.0f;
     [SerializeField] private float jumpForce = 7.0f;
     [SerializeField] private float rotationSpeed = 10.0f;

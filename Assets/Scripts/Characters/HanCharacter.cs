@@ -6,6 +6,14 @@ public class HanCharacter : BaseCharacter
 {
     private Animator animator;
 
+    public float maxHP = 250.0f;
+    public float currentHP = 90.0f;
+    public float maxSP = 100.0f;
+    public float currentSP = 80.0f;
+    public float maxSH = 170.0f;
+    public float currentSH = 170.0f;
+
+    
 
     protected override void Start()
     {

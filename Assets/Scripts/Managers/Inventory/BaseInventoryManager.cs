@@ -20,14 +20,6 @@ public abstract class BaseInventoryManager : MonoBehaviour
         Minventory = new Item[40];
     }
 
-    protected virtual void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            RemoveItem(301, 50);
-        }
-    }
-
     public int GetItem(int id, int count)
     {
         ItemInfo itemInfo;

@@ -7,8 +7,8 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     private static GameManager instance = null;
-    public BaseInventoryManager inventoryManager;
-    public BaseUIManager uiManager;
+    public BaseInventoryManager inventoryManager { get; private set; }
+    public BaseUIManager uiManager { get; private set; }
 
     private CharacterType characterType;
 
@@ -16,11 +16,13 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] Transform spawnPoint;
     [SerializeField] GameObject hanPrefab;
+    [SerializeField] GameObject hanHUDPrefab;
     [SerializeField] GameObject hanInventoryManagerPrefab;
     [SerializeField] GameObject hanUIManagerPrefab;
 
-    public GameObject playerCharacter;
+    public GameObject playerCharacter { get; private set; }
 
+    public GameObject hudCanvas;
     public GameObject inventoryCanvas;
     public List<ItemInfo> itemInfoList;
 
@@ -59,8 +61,9 @@ public class GameManager : MonoBehaviour
                 cinemachineFreeLook.Follow = playerCharacter.transform;
                 cinemachineFreeLook.LookAt = playerCharacter.transform;
 
-                inventoryManager = Instantiate(hanInventoryManagerPrefab).GetComponent<HanInventoryManager>();
-                uiManager = Instantiate(hanUIManagerPrefab).GetComponent<HanUIManager>();
+                Instantiate(hanHUDPrefab, hudCanvas.transform);
+                inventoryManager = Instantiate(hanInventoryManagerPrefab, inventoryCanvas.transform).GetComponent<HanInventoryManager>();
+                uiManager = Instantiate(hanUIManagerPrefab, inventoryCanvas.transform).GetComponent<HanUIManager>();
 
                 break;
             case CharacterType.Jo:
