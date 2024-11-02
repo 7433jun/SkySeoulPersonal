@@ -131,6 +131,7 @@ public class HanInventoryManager : BaseInventoryManager
         hanUIManager.SetInventoryItemUI();
         hanUIManager.SetEquipmentItemUI();
         hanUIManager.SetConsumableItemUI();
+        GameManager.Instance.hudManager.SetWheelUI();
     }
 
     public override void Equip(int currentSlotIndex, int quickSlotIndex)
@@ -160,6 +161,7 @@ public class HanInventoryManager : BaseInventoryManager
         hanUIManager.SetInventoryItemUI();
         hanUIManager.SetEquipmentItemUI();
         hanUIManager.SetConsumableItemUI();
+        GameManager.Instance.hudManager.SetWheelUI();
     }
 
     public override void Unequip(EquipmentType equipmentType)
@@ -229,6 +231,7 @@ public class HanInventoryManager : BaseInventoryManager
         hanUIManager.SetInventoryItemUI();
         hanUIManager.SetEquipmentItemUI();
         hanUIManager.SetConsumableItemUI();
+        GameManager.Instance.hudManager.SetWheelUI();
     }
 
     public override void Unequip(EquipmentType equipmentType, int targetSlotIndex)
@@ -313,6 +316,7 @@ public class HanInventoryManager : BaseInventoryManager
         hanUIManager.SetInventoryItemUI();
         hanUIManager.SetEquipmentItemUI();
         hanUIManager.SetConsumableItemUI();
+        GameManager.Instance.hudManager.SetWheelUI();
     }
 
     public override void Unequip(int quickSlotIndex)

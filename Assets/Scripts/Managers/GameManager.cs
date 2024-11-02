@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     private static GameManager instance = null;
+    public HanHUDManager hudManager { get; private set; }
     public BaseInventoryManager inventoryManager { get; private set; }
     public BaseUIManager uiManager { get; private set; }
 
@@ -50,6 +51,12 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        if (hudCanvas.activeSelf == false)
+            hudCanvas.SetActive(true);
+
+        if (inventoryCanvas.activeSelf == false)
+            inventoryCanvas.SetActive(true);
+
         switch (characterType)
         {
             case CharacterType.Han:
@@ -61,7 +68,7 @@ public class GameManager : MonoBehaviour
                 cinemachineFreeLook.Follow = playerCharacter.transform;
                 cinemachineFreeLook.LookAt = playerCharacter.transform;
 
-                Instantiate(hanHUDPrefab, hudCanvas.transform);
+                hudManager = Instantiate(hanHUDPrefab, hudCanvas.transform).GetComponent<HanHUDManager>();
                 inventoryManager = Instantiate(hanInventoryManagerPrefab, inventoryCanvas.transform).GetComponent<HanInventoryManager>();
                 uiManager = Instantiate(hanUIManagerPrefab, inventoryCanvas.transform).GetComponent<HanUIManager>();
 

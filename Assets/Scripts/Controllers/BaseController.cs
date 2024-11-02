@@ -68,11 +68,11 @@ public abstract class BaseController : MonoBehaviour
         float wheelInput = Input.GetAxis("Mouse ScrollWheel");
         if (wheelInput > 0)
         {
-            baseCharacter.ChangeWeapon();
+            baseCharacter.ChangeWeapon(1);
         }
         else if (wheelInput < 0)
         {
-            baseCharacter.ChangeWeapon();
+            baseCharacter.ChangeWeapon(-1);
         }
 
         if (Input.GetKeyDown(KeyCode.Tab))
@@ -132,24 +132,28 @@ public abstract class BaseController : MonoBehaviour
         {
             // 소비아이템 슬롯 1 사용
             Debug.Log("Consume Item 1");
+            baseCharacter.UseQuickSlot(0);
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             // 소비아이템 슬롯 2 사용
             Debug.Log("Consume Item 2");
+            baseCharacter.UseQuickSlot(1);
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             // 소비아이템 슬롯 3 사용
             Debug.Log("Consume Item 3");
+            baseCharacter.UseQuickSlot(2);
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha4))
         {
             // 소비아이템 슬롯 4 사용
             Debug.Log("Consume Item 4");
+            baseCharacter.UseQuickSlot(3);
         }
     }
     protected abstract void CustomActionInput();

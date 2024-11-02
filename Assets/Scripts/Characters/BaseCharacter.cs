@@ -132,10 +132,9 @@ public abstract class BaseCharacter : MonoBehaviour
         Debug.Log("LockOn");
     }
 
-    public void ChangeWeapon()
-    {
-        Debug.Log("ChangeWeapon");
-    }
+    public abstract void UseQuickSlot(int index);
+
+    public abstract void ChangeWeapon(int change);
 
     protected abstract void MoveAni(float horizontal, float vertical);
     protected abstract void JumpAni();
