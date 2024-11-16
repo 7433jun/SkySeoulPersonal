@@ -4,13 +4,18 @@ using UnityEngine;
 
 public abstract class BaseCharacter : MonoBehaviour
 {
-    [SerializeField] private float speed = 5.0f;
+    [SerializeField] private float walkspeed = 0.5f;
+    [SerializeField] private float runspeed = 1.5f;
+    [SerializeField] private float dodgespeed = 4.0f;
     [SerializeField] private float jumpForce = 7.0f;
     [SerializeField] private float rotationSpeed = 10.0f;
 
+    private float speed;
     private float horizontal;
     private float vertical;
 
+    private bool isMove;
+    private bool isDodge;
 
     public bool grounded = true;
     private static float groundOffset = -0.14f;
@@ -23,12 +28,17 @@ public abstract class BaseCharacter : MonoBehaviour
     private Transform cameraTransform;
 
     private CharacterController controller;
+    protected Animator animator;
 
     protected virtual void Start()
     {
         controller = GetComponent<CharacterController>();
+        animator = GetComponent<Animator>();
 
         cameraTransform = Camera.main.transform;
+
+        speed = walkspeed;
+        isMove = true;
     }
 
     
@@ -93,6 +103,13 @@ public abstract class BaseCharacter : MonoBehaviour
 
     public void SetMove(float _horizontal, float _vertical)
     {
+        if (!isMove)
+        {
+            horizontal = 0f;
+            vertical = 0f;
+            return;
+        }
+
         horizontal = _horizontal;
         vertical = _vertical;
     }
@@ -107,11 +124,6 @@ public abstract class BaseCharacter : MonoBehaviour
         }
     }
 
-    public void Fire()
-    {
-        Debug.Log("Fire");
-    }
-
     public void Aim()
     {
         Debug.Log("Aim");
@@ -122,9 +134,38 @@ public abstract class BaseCharacter : MonoBehaviour
         Debug.Log("Crouch");
     }
 
-    public void DodgeAndRun()
+    public void Run(bool isRun)
     {
-        Debug.Log("DodgeAndRun");
+        RunAni(isRun);
+
+        if (isRun)
+        {
+            speed = runspeed;
+        }
+        else
+        {
+            speed = walkspeed;
+        }
+    }
+
+    public void Dodge()
+    {
+        if (!isDodge)
+        {
+            StartCoroutine(DodgeLock());
+        }
+        DodgeAni();
+    }
+
+    IEnumerator DodgeLock()
+    {
+        isDodge = true;
+        SetMove(false);
+
+        yield return new WaitForSeconds(1.33f);
+
+        SetMove(true);
+        isDodge = false;
     }
 
     public void LockOn()
@@ -132,11 +173,21 @@ public abstract class BaseCharacter : MonoBehaviour
         Debug.Log("LockOn");
     }
 
+    public void SetMove(bool value)
+    {
+        isMove = value;
+    }
+
     public abstract void UseQuickSlot(int index);
 
     public abstract void ChangeWeapon(int change);
 
+    public abstract void Fire();
+
     protected abstract void MoveAni(float horizontal, float vertical);
     protected abstract void JumpAni();
     protected abstract void FallAni(bool isFall);
+    protected abstract void RunAni(bool isRun);
+    protected abstract void FireAni();
+    protected abstract void DodgeAni();
 }

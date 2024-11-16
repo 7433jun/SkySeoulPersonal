@@ -7,7 +7,8 @@ public abstract class BaseController : MonoBehaviour
 {
     protected BaseCharacter baseCharacter;
 
-
+    private float pressTime = 0f;
+    private float requireHoldTime = 0.2f;
 
     protected virtual void Start()
     {
@@ -41,7 +42,7 @@ public abstract class BaseController : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            //baseCharacter.Fire();
+            baseCharacter.Fire();
         }
         if (Input.GetMouseButton(0))
         {
@@ -82,15 +83,25 @@ public abstract class BaseController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-            baseCharacter.DodgeAndRun();
+            pressTime = 0f;
         }
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            baseCharacter.DodgeAndRun();
+            pressTime += Time.deltaTime;
+
+            if (pressTime > requireHoldTime)
+            {
+                baseCharacter.Run(true);
+            }
         }
         if (Input.GetKeyUp(KeyCode.LeftShift))
         {
-            baseCharacter.DodgeAndRun();
+            baseCharacter.Run(false);
+
+            if (pressTime < requireHoldTime)
+            {
+                baseCharacter.Dodge();
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.C))
@@ -121,8 +132,14 @@ public abstract class BaseController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            //뒤로가기 UI
-            Debug.Log("Escape");
+            if (GameManager.Instance.uiManager.ICanvas.enabled)
+            {
+                GameManager.Instance.uiManager.ToggleInventory();
+            }
+            else
+            {
+                GameManager.Instance.Quit();
+            }
         }
     }
 

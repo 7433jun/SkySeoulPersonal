@@ -287,7 +287,13 @@ public class EnhancementUI : MonoBehaviour
 
     public void SetEnhanceUI(List<RequireItem> requireItemList)
     {
+        foreach (Transform child in ingredientViewTransform)
+        {
+            Destroy(child.gameObject);
+        }
         ingredientViewSlots.Clear();
+        enhanceButton.interactable = false;
+        enhanceButton.onClick.RemoveAllListeners();
 
         foreach (RequireItem requireItem in requireItemList)
         {

@@ -54,6 +54,7 @@ public class Drone : Item
 
     public void EnhanceShield()
     {
+        Unequip();
         if (currentShieldEnhanceCount < maxShieldEnhanceCount)
         {
             increaseShield += droneInfo.shieldEnhancements[currentShieldEnhanceCount].increaseAmount;
@@ -62,15 +63,16 @@ public class Drone : Item
         }
 
         finalShield = droneInfo.baseShield + increaseShield;
+        Equip();
     }
 
     public void Equip()
     {
-
+        GameManager.Instance.playerCharacter.GetComponent<HanCharacter>().SetSH(finalShield);
     }
 
     public void Unequip()
     {
-
+        GameManager.Instance.playerCharacter.GetComponent<HanCharacter>().SetSH(-finalShield);
     }
 }

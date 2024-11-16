@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
 
     private CharacterType characterType;
 
-    [SerializeField] CinemachineFreeLook cinemachineFreeLook;
+    public CinemachineFreeLook cinemachineFreeLook;
 
     [SerializeField] Transform spawnPoint;
     [SerializeField] GameObject hanPrefab;
@@ -80,10 +80,35 @@ public class GameManager : MonoBehaviour
             default:
                 break;
         }
+
+        ViewCursor(false);
     }
 
     public void SwitchScene(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
+    }
+
+    public void ViewCursor(bool value)
+    {
+        if (value)
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+        }
+        else
+        {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+    }
+
+    public void Quit()
+    {
+#if UNITY_EDITOR
+        //UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
     }
 }

@@ -110,6 +110,7 @@ public class Gun : Item
 
     public void EnhanceFirerate()
     {
+        Unequip();
         if (currentFirerateEnhanceCount < maxFirerateEnhanceCount)
         {
             increaseFirerate += gunInfo.firerateEnhancements[currentFirerateEnhanceCount].increaseAmount;
@@ -118,16 +119,17 @@ public class Gun : Item
         }
 
         finalFirerate = gunInfo.baseFirerate + increaseFirerate;
+        Equip();
     }
 
     public void Equip()
     {
-
+        
     }
 
     public void Unequip()
     {
-
+        
     }
 
     public void Fire()

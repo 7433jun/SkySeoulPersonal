@@ -32,12 +32,18 @@ public class HanInventoryManager : BaseInventoryManager
                         if (gun != null)
                         {
                             Item tempItem = gun;
+                            gun.Unequip();
+
                             gun = Einventory[currentSlotIndex] as Gun;
+                            gun.Equip();
+
                             Einventory[currentSlotIndex] = tempItem;
                         }
                         else
                         {
                             gun = Einventory[currentSlotIndex] as Gun;
+                            gun.Equip();
+
                             Einventory[currentSlotIndex] = null;
                         }
                         break;
@@ -45,12 +51,18 @@ public class HanInventoryManager : BaseInventoryManager
                         if (drone != null)
                         {
                             Item tempItem = drone;
+                            drone.Unequip();
+
                             drone = Einventory[currentSlotIndex] as Drone;
+                            drone.Equip();
+
                             Einventory[currentSlotIndex] = tempItem;
                         }
                         else
                         {
                             drone = Einventory[currentSlotIndex] as Drone;
+                            drone.Equip();
+
                             Einventory[currentSlotIndex] = null;
                         }
                         break;
@@ -58,12 +70,18 @@ public class HanInventoryManager : BaseInventoryManager
                         if (armor != null)
                         {
                             Item tempItem = armor;
+                            armor.Unequip();
+
                             armor = Einventory[currentSlotIndex] as Armor;
+                            armor.Equip();
+
                             Einventory[currentSlotIndex] = tempItem;
                         }
                         else
                         {
                             armor = Einventory[currentSlotIndex] as Armor;
+                            armor.Equip();
+
                             Einventory[currentSlotIndex] = null;
                         }
                         break;
@@ -71,12 +89,18 @@ public class HanInventoryManager : BaseInventoryManager
                         if (phone != null)
                         {
                             Item tempItem = phone;
+                            phone.Unequip();
+
                             phone = Einventory[currentSlotIndex] as Phone;
+                            phone.Equip();
+
                             Einventory[currentSlotIndex] = tempItem;
                         }
                         else
                         {
                             phone = Einventory[currentSlotIndex] as Phone;
+                            phone.Equip();
+
                             Einventory[currentSlotIndex] = null;
                         }
                         break;
@@ -84,12 +108,18 @@ public class HanInventoryManager : BaseInventoryManager
                         if (laptop != null)
                         {
                             Item tempItem = laptop;
+                            laptop.Unequip();
+
                             laptop = Einventory[currentSlotIndex] as Laptop;
+                            laptop.Equip();
+
                             Einventory[currentSlotIndex] = tempItem;
                         }
                         else
                         {
                             laptop = Einventory[currentSlotIndex] as Laptop;
+                            laptop.Equip();
+
                             Einventory[currentSlotIndex] = null;
                         }
                         break;
@@ -173,6 +203,7 @@ public class HanInventoryManager : BaseInventoryManager
                 {
                     if (Einventory[i] == null)
                     {
+                        gun.Unequip();
                         Einventory[i] = gun;
                         gun = null;
                         break;
@@ -184,6 +215,7 @@ public class HanInventoryManager : BaseInventoryManager
                 {
                     if (Einventory[i] == null)
                     {
+                        drone.Unequip();
                         Einventory[i] = drone;
                         drone = null;
                         break;
@@ -195,6 +227,7 @@ public class HanInventoryManager : BaseInventoryManager
                 {
                     if (Einventory[i] == null)
                     {
+                        armor.Unequip();
                         Einventory[i] = armor;
                         armor = null;
                         break;
@@ -206,6 +239,7 @@ public class HanInventoryManager : BaseInventoryManager
                 {
                     if (Einventory[i] == null)
                     {
+                        phone.Unequip();
                         Einventory[i] = phone;
                         phone = null;
                         break;
@@ -217,6 +251,7 @@ public class HanInventoryManager : BaseInventoryManager
                 {
                     if (Einventory[i] == null)
                     {
+                        laptop.Unequip();
                         Einventory[i] = laptop;
                         laptop = null;
                         break;
@@ -248,6 +283,7 @@ public class HanInventoryManager : BaseInventoryManager
                 }
                 else
                 {
+                    gun.Unequip();
                     Einventory[targetSlotIndex] = gun;
                     gun = null;
                 }
@@ -262,6 +298,7 @@ public class HanInventoryManager : BaseInventoryManager
                 }
                 else
                 {
+                    drone.Unequip();
                     Einventory[targetSlotIndex] = drone;
                     drone = null;
                 }
@@ -276,6 +313,7 @@ public class HanInventoryManager : BaseInventoryManager
                 }
                 else
                 {
+                    armor.Unequip();
                     Einventory[targetSlotIndex] = armor;
                     armor = null;
                 }
@@ -290,6 +328,7 @@ public class HanInventoryManager : BaseInventoryManager
                 }
                 else
                 {
+                    phone.Unequip();
                     Einventory[targetSlotIndex] = phone;
                     phone = null;
                 }
@@ -304,6 +343,7 @@ public class HanInventoryManager : BaseInventoryManager
                 }
                 else
                 {
+                    laptop.Unequip();
                     Einventory[targetSlotIndex] = laptop;
                     laptop = null;
                 }

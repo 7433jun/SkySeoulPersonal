@@ -16,7 +16,7 @@ public abstract class BaseUIManager : MonoBehaviour
     public GameObject dragIconPrefab;
     public GameObject dragIcon;
 
-    private Canvas ICanvas;
+    public Canvas ICanvas;
 
     protected virtual void Start()
     {
@@ -62,12 +62,18 @@ public abstract class BaseUIManager : MonoBehaviour
     {
         if (ICanvas.enabled)
         {
+            GameManager.Instance.ViewCursor(false);
+            GameManager.Instance.cinemachineFreeLook.enabled = true;
+            GameManager.Instance.playerCharacter.GetComponent<BaseCharacter>().SetMove(true);
             ICanvas.enabled = false;
 
             descriptionUI.SetDescription(null);
         }
         else
         {
+            GameManager.Instance.ViewCursor(true);
+            GameManager.Instance.cinemachineFreeLook.enabled = false;
+            GameManager.Instance.playerCharacter.GetComponent<BaseCharacter>().SetMove(false);
             ICanvas.enabled = true;
         }
     }

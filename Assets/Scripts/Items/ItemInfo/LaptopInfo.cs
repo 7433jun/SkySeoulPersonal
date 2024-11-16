@@ -53,6 +53,7 @@ public class Laptop : Item
 
     public void EnhanceHackper()
     {
+        Unequip();
         if (currentHackperEnhanceCount < maxHackperEnhanceCount)
         {
             increaseHackper += laptopInfo.HackperEnhancements[currentHackperEnhanceCount].increaseAmount;
@@ -61,15 +62,16 @@ public class Laptop : Item
         }
 
         finalHackper = laptopInfo.baseHackper + increaseHackper;
+        Equip();
     }
 
     public void Equip()
     {
-
+        GameManager.Instance.playerCharacter.GetComponent<HanCharacter>().SetHackper(finalHackper);
     }
 
     public void Unequip()
     {
-
+        GameManager.Instance.playerCharacter.GetComponent<HanCharacter>().SetHackper(-finalHackper);
     }
 }

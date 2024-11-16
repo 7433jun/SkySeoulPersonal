@@ -53,6 +53,7 @@ public class Phone : Item
 
     public void EnhanceCost()
     {
+        Unequip();
         if (currentCostEnhanceCount < maxCostEnhanceCount)
         {
             increaseCost += phoneInfo.CostEnhancements[currentCostEnhanceCount].increaseAmount;
@@ -61,15 +62,16 @@ public class Phone : Item
         }
 
         finalCost = phoneInfo.baseCost + increaseCost;
+        Equip();
     }
 
     public void Equip()
     {
-
+        GameManager.Instance.playerCharacter.GetComponent<HanCharacter>().SetCost(finalCost);
     }
 
     public void Unequip()
     {
-
+        GameManager.Instance.playerCharacter.GetComponent<HanCharacter>().SetCost(-finalCost);
     }
 }

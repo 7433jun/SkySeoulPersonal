@@ -53,6 +53,7 @@ public class Armor : Item
 
     public void EnhanceHealth()
     {
+        Unequip();
         if (currentHealthEnhanceCount < maxHealthEnhanceCount)
         {
             increaseHealth += armorInfo.healthEnhancements[currentHealthEnhanceCount].increaseAmount;
@@ -61,15 +62,16 @@ public class Armor : Item
         }
 
         finalHealth = armorInfo.baseHealth + increaseHealth;
+        Equip();
     }
 
     public void Equip()
     {
-
+        GameManager.Instance.playerCharacter.GetComponent<HanCharacter>().SetHP(finalHealth);
     }
 
     public void Unequip()
     {
-
+        GameManager.Instance.playerCharacter.GetComponent<HanCharacter>().SetHP(-finalHealth);
     }
 }
