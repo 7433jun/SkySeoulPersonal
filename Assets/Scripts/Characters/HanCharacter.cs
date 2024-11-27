@@ -5,6 +5,7 @@ using UnityEngine;
 public class HanCharacter : BaseCharacter
 {
     public Transform handTransform;
+    [SerializeField] private Transform aimTransform;
 
     public float baseHP = 250.0f;
     public float additionalHP = 0;
@@ -30,6 +31,10 @@ public class HanCharacter : BaseCharacter
     public float additionalHackper = 0;
     public float maxHackper;
 
+    private float shotTime;
+    private float shotDelay = 0.5f;
+
+
     private HanInventoryManager inventoryManager;
     public int currentHand = -1;
 
@@ -49,6 +54,7 @@ public class HanCharacter : BaseCharacter
     {
         base.Update();
 
+        shotTime += Time.deltaTime;
     }
 
     public void RobotSelect()
@@ -122,7 +128,12 @@ public class HanCharacter : BaseCharacter
         GameManager.Instance.hudManager.SetWheelUI();
     }
 
-    public override void Fire()
+    public override void FireEnter()
+    {
+
+    }
+
+    public override void FireStay()
     {
         if (currentHand == 0)
         {
@@ -140,10 +151,64 @@ public class HanCharacter : BaseCharacter
             }
             else
             {
+                Vector3 direction = ray.direction;
+                direction.y = 0;
+                Quaternion targetRotation = Quaternion.LookRotation(direction);
+                transform.rotation = targetRotation;
+
+                Debug.DrawRay(handTransform.position, ray.direction * 100f, Color.red, 2f);
             }
 
-            FireAni();
+            if (shotTime >= shotDelay)
+            {
+                shotTime = 0f;
+
+                FireAni();
+            }
         }
+    }
+
+    public override void FireExit()
+    {
+        
+    }
+
+    public override void AimEnter()
+    {
+        
+    }
+
+    public override void AimStay()
+    {
+        if (currentHand == 0)
+        {
+            Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit, 100f))
+            {
+                Vector3 direction = hit.point - transform.position;
+                direction.y = 0;
+                Quaternion targetRotation = Quaternion.LookRotation(direction);
+                transform.rotation = targetRotation;
+
+                Debug.DrawRay(handTransform.position, ray.direction * 100f, Color.red, 2f);
+            }
+            else
+            {
+                Vector3 direction = ray.direction;
+                direction.y = 0;
+                Quaternion targetRotation = Quaternion.LookRotation(direction);
+                transform.rotation = targetRotation;
+
+                Debug.DrawRay(handTransform.position, ray.direction * 100f, Color.red, 2f);
+            }
+        }
+    }
+
+    public override void AimExit()
+    {
+        
     }
 
     public void SetHand(int change)

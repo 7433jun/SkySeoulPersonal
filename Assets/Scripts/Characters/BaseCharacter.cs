@@ -182,7 +182,12 @@ public abstract class BaseCharacter : MonoBehaviour
 
     public abstract void ChangeWeapon(int change);
 
-    public abstract void Fire();
+    public abstract void FireEnter();
+    public abstract void FireStay();
+    public abstract void FireExit();
+    public abstract void AimEnter();
+    public abstract void AimStay();
+    public abstract void AimExit();
 
     protected abstract void MoveAni(float horizontal, float vertical);
     protected abstract void JumpAni();

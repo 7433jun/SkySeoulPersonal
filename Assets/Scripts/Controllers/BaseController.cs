@@ -42,28 +42,28 @@ public abstract class BaseController : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            baseCharacter.Fire();
+            baseCharacter.FireEnter();
         }
         if (Input.GetMouseButton(0))
         {
-            //baseCharacter.Fire();
+            baseCharacter.FireStay();
         }
         if (Input.GetMouseButtonUp(0))
         {
-            //baseCharacter.Fire();
+            baseCharacter.FireExit();
         }
 
         if (Input.GetMouseButtonDown(1))
         {
-            //baseCharacter.Aim();
+            baseCharacter.AimEnter();
         }
         if (Input.GetMouseButton(1))
         {
-            //baseCharacter.Aim();
+            baseCharacter.AimStay();
         }
         if (Input.GetMouseButtonUp(1))
         {
-            //baseCharacter.Aim();
+            baseCharacter.AimExit();
         }
 
         float wheelInput = Input.GetAxis("Mouse ScrollWheel");
